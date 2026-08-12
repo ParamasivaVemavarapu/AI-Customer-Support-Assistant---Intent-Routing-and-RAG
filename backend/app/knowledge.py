@@ -45,7 +45,11 @@ def _split(section: str | None, text: str, size: int) -> list[tuple[str | None, 
 class KnowledgeStore:
     def __init__(self, settings: Settings):
         self.settings = settings
-        self.client = QdrantClient(url=settings.qdrant_url)
+        self.client = (
+            QdrantClient(path=settings.qdrant_path)
+            if settings.qdrant_path
+            else QdrantClient(url=settings.qdrant_url)
+        )
         self.encoder = SentenceTransformer(settings.embedding_model)
         size = self.encoder.get_sentence_embedding_dimension()
         if not self.client.collection_exists(settings.collection_name):
