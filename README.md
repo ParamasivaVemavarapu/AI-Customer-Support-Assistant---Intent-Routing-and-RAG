@@ -2,6 +2,69 @@
 
 A full-stack support assistant that routes customer requests, retrieves grounded knowledge, remembers conversations, cites sources, and escalates sensitive or low-confidence cases to a human.
 
+## Product Walkthrough
+
+```mermaid
+flowchart LR
+    A["1. Customer message"] --> B["2. Detect intent"]
+    B --> C["3. Retrieve policy"]
+    C --> D{"4. Confidence and safety check"}
+    D -->|"Safe"| E["5. Cited answer and memory"]
+    D -->|"Sensitive or uncertain"| F["5. Human escalation"]
+```
+
+### Example: automated support path
+
+**Customer**
+
+> How do I request a refund for a duplicate charge?
+
+**Representative response**
+
+> I classified this as a **billing** request and found the refund policy. Submit the transaction ID through the billing form; duplicate-charge reviews are normally started after verification.
+>
+> **Citation:** starter-faq.md · Refunds and duplicate charges
+
+### Example: escalation path
+
+**Customer**
+
+> My account may be compromised. I need a human now.
+
+**Representative response**
+
+> This request has been escalated to a human support agent because it concerns possible account compromise.
+
+The response contract includes intent, confidence, citations, session ID, escalation status, and escalation ID. Examples show implemented behavior and are not classification-accuracy claims.
+
+### API example
+
+```bash
+curl -X POST http://localhost:8000/api/chat \
+  -H "Content-Type: application/json" \
+  -d '{"message":"How do I request a refund for a duplicate charge?"}'
+```
+
+```json
+{
+  "session_id": "example-session-id",
+  "message_id": 2,
+  "answer": "Submit the transaction ID through the billing form...",
+  "intent": "billing",
+  "confidence": 0.82,
+  "citations": [
+    {
+      "source": "starter-faq.md",
+      "section": "Refunds and duplicate charges",
+      "passage": "Duplicate charges can be submitted for review...",
+      "score": 0.82
+    }
+  ],
+  "escalated": false,
+  "escalation_id": null
+}
+```
+
 ## The Problem
 
 Support teams repeatedly answer the same questions while also handling urgent fraud, safety, account-access, and complaint cases. A useful assistant must do more than generate text: it must understand the request, retrieve approved information, maintain context, and know when automation should stop.
