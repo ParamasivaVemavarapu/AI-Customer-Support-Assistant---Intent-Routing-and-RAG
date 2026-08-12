@@ -126,6 +126,7 @@ flowchart TD
 The system automates the complete **route → retrieve → answer → remember → escalate** decision path. It also persists conversation history and creates reviewable escalation records instead of silently answering sensitive or uncertain requests.
 
 These results are deterministic regression measurements on a small synthetic set. They are not production ticket volume, agent-time savings, customer-satisfaction impact, or independently audited model performance.
+
 ## Screenshots / Demo
 
 Run the local demonstration and test both automation paths:
