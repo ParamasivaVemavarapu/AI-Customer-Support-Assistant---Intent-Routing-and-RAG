@@ -10,7 +10,13 @@ from .service import SupportService
 
 settings = get_settings()
 app = FastAPI(title="AI Customer Support Assistant", version="1.0.0")
-app.add_middleware(CORSMiddleware, allow_origins=settings.allowed_origins, allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.allowed_origins,
+    allow_origin_regex=settings.cors_origin_regex or None,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 @lru_cache
@@ -29,6 +35,11 @@ def knowledge() -> KnowledgeStore:
 
 def service(db: Database = Depends(database), store: KnowledgeStore = Depends(knowledge)) -> SupportService:
     return SupportService(settings, db, store)
+
+
+@app.get("/")
+def root() -> dict:
+    return {"service": "AI Customer Support Assistant", "status": "ok", "docs": "/docs"}
 
 
 @app.get("/health")
