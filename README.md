@@ -6,6 +6,24 @@
 
 A full-stack support assistant that routes customer requests, retrieves grounded knowledge, remembers conversations, cites sources, and escalates sensitive or low-confidence cases to a human.
 
+## Project Case Study
+
+### Problem
+
+Support teams repeatedly answer common questions while urgent fraud, account-access, complaint, and human-assistance requests require safe escalation. A useful assistant must route requests, use approved knowledge, preserve context, and stop automation when confidence or safety is insufficient.
+
+### What I Built
+
+I built a full-stack support assistant that routes six intent classes, retrieves approved knowledge from Qdrant, returns cited responses, stores conversation history in SQLite, and creates reviewable human-escalation records for sensitive, explicit-human, low-confidence, or repeatedly unresolved cases.
+
+### Tech Used
+
+Python and FastAPI for routing, RAG, memory, and escalation APIs; Sentence Transformers and Qdrant for knowledge retrieval; SQLite for conversation state; Next.js and TypeScript for the support console; Docker Compose, pytest, Ruff, and GitHub Actions for reproducible engineering and quality automation.
+
+### Outcome
+
+The system automates **route → retrieve → answer → remember → escalate** in one workflow. On its versioned 10-message synthetic regression set, the real deterministic router records **0.900 intent accuracy**, **1.000 escalation recall**, and **1.000 claim-to-evidence RAG faithfulness**. These values validate regression behavior rather than production ticket impact.
+
 ## Product Walkthrough
 
 ```mermaid
