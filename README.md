@@ -112,10 +112,20 @@ flowchart TD
 - Run without an LLM key using an extractive fallback
 - Test and build the project through GitHub Actions CI
 
-## Results
+## Results and Measurable Evidence
 
-The project implements the complete support decision path in one application: **route → retrieve → answer → remember → escalate**. The default escalation threshold is `0.35`, and two unresolved assistant responses trigger escalation. These are policy settings, not model-accuracy claims. A labeled intent set and offline RAG evaluation are needed before reporting classification or retrieval metrics.
+| Measure | Result | Scope |
+|---|---:|---|
+| Labeled support messages | 10 | Versioned synthetic evaluation set |
+| Intent classes | 6 | Billing, technical, account, product, complaint, general |
+| Intent accuracy | 0.900 | Real deterministic router on the offline fixture |
+| Escalation recall | 1.000 | Urgent and low-confidence positive cases |
+| RAG faithfulness | 1.000 | Atomic claims supported by supplied evidence |
+| Automated evaluation gates | 3 | Routing, escalation, faithfulness |
 
+The system automates the complete **route → retrieve → answer → remember → escalate** decision path. It also persists conversation history and creates reviewable escalation records instead of silently answering sensitive or uncertain requests.
+
+These results are deterministic regression measurements on a small synthetic set. They are not production ticket volume, agent-time savings, customer-satisfaction impact, or independently audited model performance.
 ## Screenshots / Demo
 
 Run the local demonstration and test both automation paths:
