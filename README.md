@@ -192,6 +192,18 @@ The backend indexes `knowledge-base/starter-faq.md` on first startup. Extractive
 
 The assistant escalates when the customer requests a human, uses urgent safety/fraud/legal/account-compromise language, receives retrieval confidence below the configured threshold, or accumulates two unresolved responses.
 
+## Deployment Details
+
+The repository is prepared for a split cloud deployment, but no public Customer Support URL is currently claimed.
+
+- **Backend:** root `Dockerfile` targets Render and starts FastAPI on the platform-provided `PORT`.
+- **Data services:** production demo mode uses embedded Qdrant and SQLite; local Docker Compose retains the external Qdrant workflow.
+- **Frontend:** deploy `frontend/` to Vercel and set `NEXT_PUBLIC_API_URL` to the Render service URL.
+- **CORS:** the production container accepts Vercel deployment origins through `CORS_ORIGIN_REGEX`.
+- **Persistence boundary:** embedded vectors and SQLite on an ephemeral instance are demo infrastructure, not durable production support records.
+
+After both services are live and verified, this section should be updated with the public console, API documentation, and health-check URLs.
+
 ## Engineering Quality
 
 This repository includes modular Python services, typed API contracts, environment-based configuration, automated tests with coverage, Ruff linting, TypeScript checks, reproducible Docker builds, and GitHub Actions CI. See [Engineering Quality](docs/ENGINEERING.md) for the quality gates and production-readiness boundary.
