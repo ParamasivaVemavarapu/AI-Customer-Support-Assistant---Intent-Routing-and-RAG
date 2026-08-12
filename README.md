@@ -176,6 +176,16 @@ This repository includes modular Python services, typed API contracts, environme
 - Add PII redaction, authentication, RBAC, rate limiting, and audit logs
 - Add hybrid retrieval, reranking, and offline RAG evaluation
 
+## Reproducible Evaluation
+
+The versioned [evaluation suite](evaluation/README.md) executes the real intent router and measures intent accuracy, escalation recall, and claim-to-evidence RAG faithfulness.
+
+```bash
+python evaluation/evaluate.py
+```
+
+The labeled fixture is synthetic and intended for deterministic regression testing. Production claims require a larger, independently labeled, de-identified traffic sample.
+
 ## License
 
 MIT
