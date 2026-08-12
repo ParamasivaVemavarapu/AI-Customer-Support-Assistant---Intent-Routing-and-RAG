@@ -163,6 +163,10 @@ The backend indexes `knowledge-base/starter-faq.md` on first startup. Extractive
 
 The assistant escalates when the customer requests a human, uses urgent safety/fraud/legal/account-compromise language, receives retrieval confidence below the configured threshold, or accumulates two unresolved responses.
 
+## Engineering Quality
+
+This repository includes modular Python services, typed API contracts, environment-based configuration, automated tests with coverage, Ruff linting, TypeScript checks, reproducible Docker builds, and GitHub Actions CI. See [Engineering Quality](docs/ENGINEERING.md) for the quality gates and production-readiness boundary.
+
 ## Production Roadmap
 
 - Add screenshots and a hosted demonstration
