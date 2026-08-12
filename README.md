@@ -1,5 +1,9 @@
 # AI Customer Support Assistant
 
+![Representative product preview](docs/product-preview.svg)
+
+> Representative preview generated from the implemented frontend layout and verified API response fields.
+
 A full-stack support assistant that routes customer requests, retrieves grounded knowledge, remembers conversations, cites sources, and escalates sensitive or low-confidence cases to a human.
 
 ## Product Walkthrough
