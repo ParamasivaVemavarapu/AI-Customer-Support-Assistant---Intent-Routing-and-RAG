@@ -4,6 +4,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 
 class Settings(BaseSettings):
     qdrant_url: str = "http://localhost:6333"
+    qdrant_path: str = ""
     collection_name: str = "support_knowledge"
     database_path: str = "support.db"
     starter_knowledge_path: str = "../knowledge-base/starter-faq.md"
@@ -14,6 +15,7 @@ class Settings(BaseSettings):
     mistral_api_key: str = ""
     escalation_threshold: float = 0.35
     cors_origins: str = "http://localhost:3000"
+    cors_origin_regex: str = ""
     model_config = SettingsConfigDict(env_file=".env", extra="ignore")
 
     @property
